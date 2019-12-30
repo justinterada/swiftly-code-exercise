@@ -18,10 +18,10 @@ public class ProductRecordFileReader implements ProductRecordReader {
         InputStreamReader isr = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(isr);
         String line;
-        HashSet<String> dictionary = new HashSet<>();
+        ProductRecordLineParser parser = new ProductRecordLineParser();
         try {
             while ((line = bufferedReader.readLine()) != null) {
-                dictionary.add(line.toUpperCase(Locale.US));
+                productRecordList.add(parser.parse(line));
             }
         } catch (IOException exception) {
             System.err.print("Exception when reading file: " + exception);

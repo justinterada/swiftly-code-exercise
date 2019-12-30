@@ -1,2 +1,4 @@
-rootProject.name = 'swiftly-code-exercise'
+include 'app'
+include 'core'
 
+rootProject.name = 'swiftly-code-exercise'
