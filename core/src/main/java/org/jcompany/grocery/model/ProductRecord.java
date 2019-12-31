@@ -1,37 +1,36 @@
 package org.jcompany.grocery.model;
 
+import java.math.BigDecimal;
+
 public class ProductRecord {
     private final int id;
     private final String description;
-    private final Price price;
-    private final Price promotionalPrice;
-    private final Price splitPrice;
-    private final Price promotionalSplitPrice;
-    private final int regularFor;
-    private final int promotionalFor;
-    private final String size;
+    private final String displayPrice;
+    private final BigDecimal calculatorPrice;
+    private final String promotionalDisplayPrice;
+    private final BigDecimal promotionalCalculatorPrice;
     private final UnitOfMeasure unitOfMeasure;
+    private final String size;
+    private final BigDecimal taxRate;
 
     private ProductRecord(final int id,
-                         final String description,
-                         final Price price,
-                         final Price promotionalPrice,
-                         final Price splitPrice,
-                         final Price promotionalSplitPrice,
-                         final int regularFor,
-                         final int promotionalFor,
-                         final String size,
-                         final UnitOfMeasure unitOfMeasure) {
+                          final String description,
+                          final String displayPrice,
+                          final BigDecimal calculatorPrice,
+                          final String promotionalDisplayPrice,
+                          final BigDecimal promotionalCalculatorPrice,
+                          final UnitOfMeasure unitOfMeasure,
+                          final String size,
+                          final BigDecimal taxRate) {
         this.id = id;
         this.description = description;
-        this.price = price;
-        this.promotionalPrice = promotionalPrice;
-        this.splitPrice = splitPrice;
-        this.promotionalSplitPrice = promotionalSplitPrice;
-        this.regularFor = regularFor;
-        this.promotionalFor = promotionalFor;
-        this.size = size;
+        this.displayPrice = displayPrice;
+        this.calculatorPrice = calculatorPrice;
+        this.promotionalDisplayPrice = promotionalDisplayPrice;
+        this.promotionalCalculatorPrice = promotionalCalculatorPrice;
         this.unitOfMeasure = unitOfMeasure;
+        this.size = size;
+        this.taxRate = taxRate;
     }
 
     public int getId() {
@@ -42,28 +41,24 @@ public class ProductRecord {
         return description;
     }
 
-    public Price getPrice() {
-        return price;
+    public String getDisplayPrice() {
+        return displayPrice;
     }
 
-    public Price getPromotionalPrice() {
-        return promotionalPrice;
+    public BigDecimal getCalculatorPrice() {
+        return calculatorPrice;
     }
 
-    public Price getSplitPrice() {
-        return splitPrice;
+    public BigDecimal getPromotionalCalculatorPrice() {
+        return promotionalCalculatorPrice;
     }
 
-    public Price getPromotionalSplitPrice() {
-        return promotionalSplitPrice;
+    public String getPromotionalDisplayPrice() {
+        return promotionalDisplayPrice;
     }
 
-    public int getRegularFor() {
-        return regularFor;
-    }
-
-    public int getPromotionalFor() {
-        return promotionalFor;
+    public BigDecimal getTaxRate() {
+        return taxRate;
     }
 
     public String getSize() {
@@ -77,57 +72,51 @@ public class ProductRecord {
     public static class Builder {
         private int id;
         private String description;
-        private Price price;
-        private Price promotionalPrice;
-        private Price splitPrice;
-        private Price promotionalSplitPrice;
-        private int regularFor;
-        private int promotionalFor;
-        private String size;
+        private String displayPrice;
+        private BigDecimal calculatorPrice;
+        private String promotionalDisplayPrice;
+        private BigDecimal promotionalCalculatorPrice;
         private UnitOfMeasure unitOfMeasure;
-
-        public Builder withDescription(String description) {
-            this.description = description;
-            return this;
-        }
+        private String size;
+        private BigDecimal taxRate;
 
         public Builder withId(int id) {
             this.id = id;
             return this;
         }
 
-        public Builder withPrice(Price price) {
-            this.price = price;
+        public Builder withDescription(String description) {
+            this.description = description;
             return this;
         }
 
-        public Builder withPromotionalFor(int promotionalFor) {
-            this.promotionalFor = promotionalFor;
+        public Builder withCalculatorPrice(BigDecimal calculatorPrice) {
+            this.calculatorPrice = calculatorPrice;
             return this;
         }
 
-        public Builder withPromotionalPrice(Price promotionalPrice) {
-            this.promotionalPrice = promotionalPrice;
+        public Builder withDisplayPrice(String displayPrice) {
+            this.displayPrice = displayPrice;
             return this;
         }
 
-        public Builder withPromotionalSplitPrice(Price promotionalSplitPrice) {
-            this.promotionalSplitPrice = promotionalSplitPrice;
+        public Builder withPromotionalCalculatorPrice(BigDecimal promotionalCalculatorPrice) {
+            this.promotionalCalculatorPrice = promotionalCalculatorPrice;
             return this;
         }
 
-        public Builder withRegularFor(int regularFor) {
-            this.regularFor = regularFor;
+        public Builder withPromotionalDisplayPrice(String promotionalDecimalPrice) {
+            this.promotionalDisplayPrice = promotionalDecimalPrice;
+            return this;
+        }
+
+        public Builder withTaxRate(BigDecimal taxRate) {
+            this.taxRate = taxRate;
             return this;
         }
 
         public Builder withSize(String size) {
             this.size = size;
-            return this;
-        }
-
-        public Builder withSplitPrice(Price splitPrice) {
-            this.splitPrice = splitPrice;
             return this;
         }
 
@@ -137,16 +126,30 @@ public class ProductRecord {
         }
 
         public ProductRecord build() {
-            return new ProductRecord(this.id,
-                this.description,
-                this.price,
-                this.promotionalPrice,
-                this.splitPrice,
-                this.promotionalSplitPrice,
-                this.regularFor,
-                this.promotionalFor,
-                this.size,
-                this.unitOfMeasure);
+            return new ProductRecord(id,
+                    description,
+                    displayPrice,
+                    calculatorPrice,
+                    promotionalDisplayPrice,
+                    promotionalCalculatorPrice,
+                    unitOfMeasure,
+                    size,
+                    taxRate);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "    id: " + id + ",\n" +
+                "    description: \"" + description + "\",\n" +
+                "    displayPrice: \"" + displayPrice + "\",\n" +
+                "    calculatorPrice: " + calculatorPrice + ",\n" +
+                "    promotionalDisplayPrice: \"" + promotionalDisplayPrice + "\",\n" +
+                "    promotionalCalculatorPrice: " + promotionalCalculatorPrice + ",\n" +
+                "    unitOfMeasure: " + unitOfMeasure + ",\n" +
+                "    size: \"" + displayPrice + "\",\n" +
+                "    taxRate: " + promotionalCalculatorPrice + ",\n" +
+                "}";
     }
 }

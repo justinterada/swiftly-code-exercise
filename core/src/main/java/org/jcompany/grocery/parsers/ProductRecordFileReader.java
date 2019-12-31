@@ -1,20 +1,18 @@
-package org.jcompany.grocery;
+package org.jcompany.grocery.parsers;
 
-import org.jcompany.grocery.model.ProductRecord;
+import org.jcompany.grocery.model.ProductRecordLine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
-public class ProductRecordFileReader implements ProductRecordReader {
+public class ProductRecordFileReader implements ProductRecordLineReader {
     @Override
-    public List<ProductRecord> getRecords(InputStream inputStream) {
-        List<ProductRecord> productRecordList = new ArrayList<>();
+    public List<ProductRecordLine> getRecords(InputStream inputStream) {
+        List<ProductRecordLine> productRecordList = new ArrayList<>();
         InputStreamReader isr = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(isr);
         String line;
