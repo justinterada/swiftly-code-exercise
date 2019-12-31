@@ -15,25 +15,25 @@ public class ProductRecordMapper {
 
         BigDecimal calculatorPrice = null;
         String displayPrice = null;
-        if (!productRecordLine.getPrice().equals(BigDecimal.ZERO)) {
+        if (productRecordLine.getPrice().compareTo(BigDecimal.ZERO) != 0) {
             calculatorPrice = productRecordLine.getPrice();
-            displayPrice = buildDisplayString(calculatorPrice);
-        } else if (!productRecordLine.getSplitPrice().equals(BigDecimal.ZERO)) {
+            displayPrice = buildDisplayString(calculatorPrice, 1, unit);
+        } else if (productRecordLine.getSplitPrice().compareTo(BigDecimal.ZERO) != 0) {
             calculatorPrice = productRecordLine.getSplitPrice().divide(
                     new BigDecimal(productRecordLine.getRegularFor()), 4, RoundingMode.FLOOR);
-            displayPrice = buildDisplayStringForSplitPrice(productRecordLine.getSplitPrice(),
+            displayPrice = buildDisplayString(productRecordLine.getSplitPrice(),
                     productRecordLine.getRegularFor(), unit);
         }
 
         BigDecimal promotionalCalculatorPrice= null;
         String promotionalDisplayPrice = null;
-        if (!productRecordLine.getPromotionalPrice().equals(BigDecimal.ZERO)) {
+        if (productRecordLine.getPromotionalPrice().compareTo(BigDecimal.ZERO) != 0) {
             promotionalCalculatorPrice = productRecordLine.getPromotionalPrice();
-            promotionalDisplayPrice = buildDisplayString(promotionalCalculatorPrice);
-        } else if (!productRecordLine.getPromotionalSplitPrice().equals(BigDecimal.ZERO)) {
+            promotionalDisplayPrice = buildDisplayString(promotionalCalculatorPrice, 1, unit);
+        } else if (productRecordLine.getPromotionalSplitPrice().compareTo(BigDecimal.ZERO) != 0) {
             promotionalCalculatorPrice = productRecordLine.getPromotionalSplitPrice().divide(
                     new BigDecimal(productRecordLine.getPromotionalFor()), 4, RoundingMode.FLOOR);
-            promotionalDisplayPrice = buildDisplayStringForSplitPrice(productRecordLine.getPromotionalSplitPrice(),
+            promotionalDisplayPrice = buildDisplayString(productRecordLine.getPromotionalSplitPrice(),
                     productRecordLine.getPromotionalFor(), unit);
         }
 
@@ -55,18 +55,22 @@ public class ProductRecordMapper {
                 .build();
     }
 
-    private String buildDisplayString(BigDecimal price) {
+    private String formatCurrency(BigDecimal price) {
         return NumberFormat.getCurrencyInstance(Locale.US).format(price);
     }
 
-    private String buildDisplayStringForSplitPrice(BigDecimal price, int splitAmount, UnitOfMeasure unit) {
+    private String buildDisplayString(BigDecimal price, int splitAmount, UnitOfMeasure unit) {
         if (unit.equals(UnitOfMeasure.EACH)) {
-            return String.format("%s for %n", buildDisplayString(price), splitAmount);
+            if (splitAmount == 1) {
+                return String.format("%s each", formatCurrency(price));
+            } else {
+                return String.format("%s for %n", formatCurrency(price), splitAmount);
+            }
         } else {
             if (splitAmount == 1) {
-                return String.format("%s per %n pound", buildDisplayString(price), splitAmount);
+                return String.format("%s per pound", formatCurrency(price));
             } else {
-                return String.format("%s per %n pounds", buildDisplayString(price), splitAmount);
+                return String.format("%s per %n pounds", formatCurrency(price), splitAmount);
             }
         }
     }

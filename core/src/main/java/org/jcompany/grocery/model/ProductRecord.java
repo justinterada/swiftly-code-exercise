@@ -143,13 +143,21 @@ public class ProductRecord {
         return "{\n" +
                 "    id: " + id + ",\n" +
                 "    description: \"" + description + "\",\n" +
-                "    displayPrice: \"" + displayPrice + "\",\n" +
+                "    displayPrice: " + formatStringForJson(displayPrice) + ",\n" +
                 "    calculatorPrice: " + calculatorPrice + ",\n" +
-                "    promotionalDisplayPrice: \"" + promotionalDisplayPrice + "\",\n" +
+                "    promotionalDisplayPrice: " + formatStringForJson(promotionalDisplayPrice) + ",\n" +
                 "    promotionalCalculatorPrice: " + promotionalCalculatorPrice + ",\n" +
                 "    unitOfMeasure: " + unitOfMeasure + ",\n" +
-                "    size: \"" + displayPrice + "\",\n" +
-                "    taxRate: " + promotionalCalculatorPrice + ",\n" +
+                "    size: " + formatStringForJson(size) + ",\n" +
+                "    taxRate: " + taxRate + ",\n" +
                 "}";
+    }
+
+    private static String formatStringForJson(String value) {
+        if (value == null) {
+            return "null";
+        } else {
+            return String.format("\"%s\"", value);
+        }
     }
 }
