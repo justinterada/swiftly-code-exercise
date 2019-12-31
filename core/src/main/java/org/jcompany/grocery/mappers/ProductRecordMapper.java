@@ -64,13 +64,13 @@ public class ProductRecordMapper {
             if (splitAmount == 1) {
                 return String.format("%s each", formatCurrency(price));
             } else {
-                return String.format("%s for %n", formatCurrency(price), splitAmount);
+                return String.format("%s for %d", formatCurrency(price), splitAmount);
             }
         } else {
             if (splitAmount == 1) {
                 return String.format("%s per pound", formatCurrency(price));
             } else {
-                return String.format("%s per %n pounds", formatCurrency(price), splitAmount);
+                return String.format("%s per %d pounds", formatCurrency(price), splitAmount);
             }
         }
     }
