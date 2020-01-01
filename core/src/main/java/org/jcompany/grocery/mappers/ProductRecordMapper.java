@@ -37,7 +37,7 @@ public class ProductRecordMapper {
                     productRecordLine.getPromotionalFor(), unit);
         }
 
-        BigDecimal taxRate = BigDecimal.ZERO;
+        BigDecimal taxRate = BigDecimal.ZERO.setScale(4);
         if (productRecordLine.getFlags()[4]) {
             taxRate = new BigDecimal("0.0775");
         }
