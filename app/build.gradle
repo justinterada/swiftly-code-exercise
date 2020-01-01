@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'application'
 }
 
 group 'org.jorganization'
@@ -14,4 +15,8 @@ repositories {
 
 dependencies {
     compile project(':core')
+}
+
+application {
+    mainClassName = 'org.jcompany.grocery.Main'
 }
