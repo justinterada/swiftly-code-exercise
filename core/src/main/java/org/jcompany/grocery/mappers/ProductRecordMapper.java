@@ -16,7 +16,7 @@ public class ProductRecordMapper {
         BigDecimal calculatorPrice = null;
         String displayPrice = null;
         if (productRecordLine.getPrice().compareTo(BigDecimal.ZERO) != 0) {
-            calculatorPrice = productRecordLine.getPrice();
+            calculatorPrice = productRecordLine.getPrice().setScale(4, RoundingMode.FLOOR);
             displayPrice = buildDisplayString(calculatorPrice, 1, unit);
         } else if (productRecordLine.getSplitPrice().compareTo(BigDecimal.ZERO) != 0) {
             calculatorPrice = productRecordLine.getSplitPrice().divide(
@@ -28,7 +28,7 @@ public class ProductRecordMapper {
         BigDecimal promotionalCalculatorPrice= null;
         String promotionalDisplayPrice = null;
         if (productRecordLine.getPromotionalPrice().compareTo(BigDecimal.ZERO) != 0) {
-            promotionalCalculatorPrice = productRecordLine.getPromotionalPrice();
+            promotionalCalculatorPrice = productRecordLine.getPromotionalPrice().setScale(4, RoundingMode.FLOOR);
             promotionalDisplayPrice = buildDisplayString(promotionalCalculatorPrice, 1, unit);
         } else if (productRecordLine.getPromotionalSplitPrice().compareTo(BigDecimal.ZERO) != 0) {
             promotionalCalculatorPrice = productRecordLine.getPromotionalSplitPrice().divide(

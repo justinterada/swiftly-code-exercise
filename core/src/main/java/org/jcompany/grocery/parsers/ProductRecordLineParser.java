@@ -5,8 +5,6 @@ import org.jcompany.grocery.model.ProductRecordLine;
 import java.math.BigDecimal;
 
 public class ProductRecordLineParser {
-
-
     public ProductRecordLine parse(String input) {
         int productId = Integer.parseInt(input.substring(0, 8));
         String description = input.substring(9, 68).trim();
