@@ -38,7 +38,7 @@ public class MainTest {
         assertEquals(errorOutput, "");
         String output = outContent.toString();
         assertNotNull(output);
-        assertEquals(output, String.join(System.lineSeparator(), "{",
+        assertEquals(output.trim(), String.join(System.lineSeparator(), "{",
                 "    id: 80000001,",
                 "    description: \"Kimchi-flavored white rice\",",
                 "    displayPrice: \"$5.67 each\",",
@@ -81,7 +81,6 @@ public class MainTest {
                 "    unitOfMeasure: POUND,",
                 "    size: \"lb\",",
                 "    taxRate: 0.0000,",
-                "}",
-                ""));
+                "}"));
     }
 }
