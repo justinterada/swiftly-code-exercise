@@ -42,5 +42,7 @@ To open this project in IntelliJ, run `./gradlew openIdea`.
 If you later need to rebuild the IntelliJ project if you add a dependency, run `./gradlew cleanIdea idea`.
 You may need to select the JDK version after you open the project by going to Module Settings for the main `swiftly-code-exercise`
 module:
-![Module Menu](./doc-assets/module-menu.png)
-![Project Settings](./doc-assets/project-settings.png)
+
+![Module Menu](./../../raw/master/doc-assets/module-menu.png)
+
+![Project Settings](./../../raw/master/doc-assets/project-settings.png)
