@@ -23,7 +23,7 @@ public class ProductRecordMapperTest {
 
     @Test
     public void map() {
-        final ProductRecordLine input = new ProductRecordLine.Builder()
+        final ProductRecordLine input = ProductRecordLine.getBuilder()
                 .withId(80000001)
                 .withDescription("Kimchi-flavored white rice")
                 .withPrice(new BigDecimal("5.67"))
@@ -51,7 +51,7 @@ public class ProductRecordMapperTest {
 
     @Test
     public void mapWithSplitPrice() {
-        final ProductRecordLine input = new ProductRecordLine.Builder()
+        final ProductRecordLine input = ProductRecordLine.getBuilder()
                 .withId(20005)
                 .withDescription("Mandarin Oranges")
                 .withPrice(BigDecimal.ZERO)
@@ -79,7 +79,7 @@ public class ProductRecordMapperTest {
 
     @Test
     public void mapWithPromotionalPrice() {
-        final ProductRecordLine input = new ProductRecordLine.Builder()
+        final ProductRecordLine input = ProductRecordLine.getBuilder()
                 .withId(9999)
                 .withDescription("2% Milk")
                 .withPrice(BigDecimal.ZERO)
@@ -107,7 +107,7 @@ public class ProductRecordMapperTest {
 
     @Test
     public void mapWithPromotionalSplitPrice() {
-        final ProductRecordLine input = new ProductRecordLine.Builder()
+        final ProductRecordLine input = ProductRecordLine.getBuilder()
                 .withId(8675309)
                 .withDescription("Jack Daniels")
                 .withPrice(new BigDecimal("25.00"))
@@ -135,7 +135,7 @@ public class ProductRecordMapperTest {
 
     @Test
     public void toStringTest() {
-        ProductRecord record = new ProductRecord.Builder()
+        ProductRecord record = ProductRecord.getBuilder()
                 .withId(80000001)
                 .withDescription("Kimchi-flavored white rice")
                 .withDisplayPrice("$5.67 each")

@@ -32,7 +32,7 @@ public class ProductRecordFileReaderTest {
     @Test
     public void getRecordLines() {
         InputStream input = getClass().getResourceAsStream("/test-input.txt");
-        ProductRecordLine parsedOutput = new ProductRecordLine.Builder().build();
+        ProductRecordLine parsedOutput = ProductRecordLine.getBuilder().build();
         when(lineParser.parse("80000001 Kimchi-flavored white rice                                  00000567 00000000 00000000 00000000 00000000 00000000 " +
                 "NNNNNNNNN      18oz")).thenReturn(parsedOutput);
 

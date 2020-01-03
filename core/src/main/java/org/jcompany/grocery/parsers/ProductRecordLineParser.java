@@ -18,7 +18,7 @@ public class ProductRecordLineParser {
         String productSize = input.substring(133, 142).trim();
         boolean[] flags = parseFlags(input.substring(123, 132));
 
-        return new ProductRecordLine.Builder()
+        return ProductRecordLine.getBuilder()
                 .withId(productId)
                 .withDescription(description)
                 .withPrice(regularSingularPrice)
