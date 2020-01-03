@@ -42,7 +42,7 @@ public class ProductRecordMapper {
             taxRate = new BigDecimal("0.0775");
         }
 
-        return new ProductRecord.Builder()
+        return ProductRecord.getBuilder()
                 .withId(productRecordLine.getId())
                 .withDescription(productRecordLine.getDescription())
                 .withCalculatorPrice(calculatorPrice)

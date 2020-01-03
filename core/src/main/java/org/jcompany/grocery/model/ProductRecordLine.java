@@ -76,6 +76,10 @@ public class ProductRecordLine {
         return flags;
     }
 
+    public static Builder getBuilder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private int id;
         private String description;
@@ -87,6 +91,8 @@ public class ProductRecordLine {
         private int promotionalFor;
         private String size;
         private boolean[] flags;
+
+        private Builder() { }
 
         public Builder withDescription(String description) {
             this.description = description;

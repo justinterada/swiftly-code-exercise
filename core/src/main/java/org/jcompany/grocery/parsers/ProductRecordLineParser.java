@@ -5,20 +5,47 @@ import org.jcompany.grocery.model.ProductRecordLine;
 import java.math.BigDecimal;
 
 public class ProductRecordLineParser {
+    // This could also be loaded from a configuration file but for now it's here to
+    // make changes easier to make
+    private enum Column {
+        ID(0, 7),
+        DESCRIPTION(9, 67),
+        REGULAR_PRICE(69, 76),
+        PROMOTIONAL_PRICE(78, 85),
+        REGULAR_SPLIT_PRICE(87, 94),
+        PROMOTIONAL_SPLIT_PRICE(96, 103),
+        REGULAR_FOR_X(105, 112),
+        PROMOTIONAL_FOR_X(114, 121),
+        PRODUCT_SIZE(133, 141),
+        FLAGS(123, 131);
+
+        private final int startColumnInclusive;
+        private final int endColumnInclusive;
+
+        Column(final int startColumnInclusive, final int endColumnInclusive) {
+            this.startColumnInclusive = startColumnInclusive;
+            this.endColumnInclusive = endColumnInclusive;
+        }
+
+        public String getValueFromLine(String input) {
+            return input.substring(startColumnInclusive, endColumnInclusive + 1);
+        }
+    }
+
     public ProductRecordLine parse(String input) {
-        int productId = Integer.parseInt(input.substring(0, 8));
-        String description = input.substring(9, 68).trim();
-        BigDecimal regularSingularPrice = parsePrice(input.substring(69, 77));
-        BigDecimal promotionalSingularPrice = parsePrice(input.substring(78, 86));
-        BigDecimal regularSplitPrice = parsePrice(input.substring(87, 95));
-        BigDecimal promotionalSplitPrice = parsePrice(input.substring(96, 104));
+        int productId = Integer.parseInt(Column.ID.getValueFromLine(input));
+        String description = Column.DESCRIPTION.getValueFromLine(input).trim();
+        BigDecimal regularSingularPrice = parsePrice(Column.REGULAR_PRICE.getValueFromLine(input));
+        BigDecimal promotionalSingularPrice = parsePrice(Column.PROMOTIONAL_PRICE.getValueFromLine(input));
+        BigDecimal regularSplitPrice = parsePrice(Column.REGULAR_SPLIT_PRICE.getValueFromLine(input));
+        BigDecimal promotionalSplitPrice = parsePrice(Column.PROMOTIONAL_SPLIT_PRICE.getValueFromLine(input));
 
-        int regularForX = Integer.parseInt(input.substring(105, 113));
-        int promotionalForX = Integer.parseInt(input.substring(114, 122));
-        String productSize = input.substring(133, 142).trim();
-        boolean[] flags = parseFlags(input.substring(123, 132));
+        int regularForX = Integer.parseInt(Column.REGULAR_FOR_X.getValueFromLine(input));
+        int promotionalForX = Integer.parseInt(Column.PROMOTIONAL_FOR_X.getValueFromLine(input));
+        String productSize = Column.PRODUCT_SIZE.getValueFromLine(input).trim();
+        boolean[] flags = parseFlags(Column.FLAGS.getValueFromLine(input));
 
-        return new ProductRecordLine.Builder()
+        return ProductRecordLine.getBuilder()
                 .withId(productId)
                 .withDescription(description)
                 .withPrice(regularSingularPrice)

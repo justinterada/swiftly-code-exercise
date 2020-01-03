@@ -69,7 +69,11 @@ public class ProductRecord {
         return unitOfMeasure;
     }
 
-    public static class Builder {
+    public static Builder getBuilder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
         private int id;
         private String description;
         private String displayPrice;
@@ -79,6 +83,8 @@ public class ProductRecord {
         private UnitOfMeasure unitOfMeasure;
         private String size;
         private BigDecimal taxRate;
+
+        private Builder() { }
 
         public Builder withId(int id) {
             this.id = id;
