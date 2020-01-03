@@ -5,10 +5,14 @@ import org.jcompany.grocery.parsers.ProductRecordLineParser;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -37,5 +41,17 @@ public class ProductRecordFileReaderTest {
         assertNotNull(productRecordLines);
         assertEquals(productRecordLines.size(), 1);
         assertSame(productRecordLines.get(0), parsedOutput);
+    }
+
+    @Test
+    public void getRecordLinesWithException() throws IOException {
+        InputStream input = mock(InputStream.class);
+        when(input.read()).thenThrow(IOException.class);
+
+        List<ProductRecordLine> productRecordLines = instance.getRecordLines(input);
+
+        assertNotNull(productRecordLines);
+        assertEquals(productRecordLines.size(), 0);
+        verify(lineParser, never()).parse(anyString());
     }
 }
