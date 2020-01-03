@@ -32,3 +32,15 @@ This repository is broken into two Gradle projects, `core` and `app`. Core consi
 of all the code for parsing an input stream and converting the parsed values to ProductRecord objects. 
 App is a sample application that uses core to read a file from disk and print the output to
 system out.
+
+## Running tests
+All of the tests of the project can be run using gradle by running the command `./gradlew check`. Individual
+tests can be run in IntelliJ using the TestNG plugin.
+
+## Opening the project in IntelliJ
+To open this project in IntelliJ, run `./gradlew openIdea`.
+If you later need to rebuild the IntelliJ project if you add a dependency, run `./gradlew cleanIdea idea`.
+You may need to select the JDK version after you open the project by going to Module Settings for the main `swiftly-code-exercise`
+module:
+![Module Menu](./doc-assets/module-menu.png)
+![Project Settings](./doc-assets/project-settings.png)
