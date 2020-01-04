@@ -21,3 +21,13 @@ dependencies {
 application {
     mainClassName = 'org.jcompany.grocery.Main'
 }
+
+test {
+    useTestNG() {
+        useDefaultListeners = true
+    }
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+    }
+}
+
