@@ -38,7 +38,8 @@ public class MainTest {
         assertEquals(errorOutput, "");
         String output = outContent.toString();
         assertNotNull(output);
-        assertEquals(output.trim(), String.join(System.lineSeparator(), "{",
+        String[] actualLines = output.trim().split("\n");
+        String[] expectedLines = new String[] { "{",
                 "    id: 80000001,",
                 "    description: \"Kimchi-flavored white rice\",",
                 "    displayPrice: \"$5.67 each\",",
@@ -81,6 +82,11 @@ public class MainTest {
                 "    unitOfMeasure: POUND,",
                 "    size: \"lb\",",
                 "    taxRate: 0.0000,",
-                "}"));
+                "}" };
+
+        assertEquals(actualLines.length, expectedLines.length);
+        for (int lineNum = 0; lineNum < expectedLines.length; lineNum++) {
+            assertEquals(actualLines[lineNum].trim(), expectedLines[lineNum].trim(), "Line " + (lineNum + 1));
+        }
     }
 }
